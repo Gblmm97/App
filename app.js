@@ -3,8 +3,21 @@ const gramsInput = document.querySelector("#grams");
 const totalKcalOutput = document.querySelector("#totalKcal");
 const totalKjOutput = document.querySelector("#totalKj");
 const clearButton = document.querySelector("#clearButton");
+const themeButton = document.querySelector("#themeButton");
+const themePanel = document.querySelector("#themePanel");
+const themeOptions = document.querySelectorAll(".theme-option");
+const themeColorMeta = document.querySelector("meta[name='theme-color']");
 
 const KJ_PER_KCAL = 4.184;
+const THEME_KEY = "heat-calculator-theme";
+const THEME_COLORS = {
+  original: "#15211d",
+  rosepine: "#575279",
+  berry: "#35222b",
+  matcha: "#253020",
+  sea: "#19313a",
+  night: "#111421",
+};
 
 function formatNumber(value) {
   if (!Number.isFinite(value) || value <= 0) return "0";
@@ -30,9 +43,45 @@ function clearInputs() {
   kjPer100Input.focus();
 }
 
+function setTheme(theme) {
+  const nextTheme = THEME_COLORS[theme] ? theme : "original";
+  document.body.dataset.theme = nextTheme;
+  themeColorMeta.setAttribute("content", THEME_COLORS[nextTheme]);
+  localStorage.setItem(THEME_KEY, nextTheme);
+
+  themeOptions.forEach((option) => {
+    const isActive = option.dataset.theme === nextTheme;
+    option.classList.toggle("is-active", isActive);
+    option.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+function closeThemePanel() {
+  themePanel.hidden = true;
+  themeButton.setAttribute("aria-expanded", "false");
+}
+
 kjPer100Input.addEventListener("input", calculate);
 gramsInput.addEventListener("input", calculate);
 clearButton.addEventListener("click", clearInputs);
+themeButton.addEventListener("click", () => {
+  const isOpen = !themePanel.hidden;
+  themePanel.hidden = isOpen;
+  themeButton.setAttribute("aria-expanded", String(!isOpen));
+});
+
+themeOptions.forEach((option) => {
+  option.addEventListener("click", () => {
+    setTheme(option.dataset.theme);
+    closeThemePanel();
+  });
+});
+
+document.addEventListener("click", (event) => {
+  if (themePanel.hidden) return;
+  if (themePanel.contains(event.target) || themeButton.contains(event.target)) return;
+  closeThemePanel();
+});
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -40,4 +89,5 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+setTheme(localStorage.getItem(THEME_KEY) || "original");
 calculate();
