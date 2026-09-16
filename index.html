@@ -19,8 +19,71 @@
       <section class="calculator" aria-labelledby="app-title">
         <div class="topline">
           <p class="eyebrow">食品热量</p>
-          <button class="ghost-button" id="clearButton" type="button">清空</button>
+          <div class="actions">
+            <button
+              class="icon-button"
+              id="themeButton"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="themePanel"
+            >
+              配色
+            </button>
+            <button class="ghost-button" id="clearButton" type="button">清空</button>
+          </div>
         </div>
+
+        <section class="theme-panel" id="themePanel" aria-label="选择配色" hidden>
+          <button class="theme-option" type="button" data-theme="original">
+            <span class="swatches" aria-hidden="true">
+              <i style="background: #dd6f3a"></i>
+              <i style="background: #b5d2c2"></i>
+              <i style="background: #fffdf8"></i>
+            </span>
+            <span>原配色</span>
+          </button>
+          <button class="theme-option" type="button" data-theme="rosepine">
+            <span class="swatches" aria-hidden="true">
+              <i style="background: #d7827e"></i>
+              <i style="background: #575279"></i>
+              <i style="background: #faf4ed"></i>
+            </span>
+            <span>Rose Pine</span>
+          </button>
+          <button class="theme-option" type="button" data-theme="berry">
+            <span class="swatches" aria-hidden="true">
+              <i style="background: #d85a7f"></i>
+              <i style="background: #f4c6d0"></i>
+              <i style="background: #fff7f3"></i>
+            </span>
+            <span>奶油莓果</span>
+          </button>
+          <button class="theme-option" type="button" data-theme="matcha">
+            <span class="swatches" aria-hidden="true">
+              <i style="background: #6c8f62"></i>
+              <i style="background: #bed5a5"></i>
+              <i style="background: #fbf8ed"></i>
+            </span>
+            <span>抹茶绿</span>
+          </button>
+          <button class="theme-option" type="button" data-theme="sea">
+            <span class="swatches" aria-hidden="true">
+              <i style="background: #3f8ca5"></i>
+              <i style="background: #b8ddea"></i>
+              <i style="background: #fffaf1"></i>
+            </span>
+            <span>海盐蓝</span>
+          </button>
+          <button class="theme-option" type="button" data-theme="night">
+            <span class="swatches" aria-hidden="true">
+              <i style="background: #f0a66a"></i>
+              <i style="background: #2f3552"></i>
+              <i style="background: #f8f1e7"></i>
+            </span>
+            <span>夜间深色</span>
+          </button>
+        </section>
 
         <header>
           <h1 id="app-title">热量换算</h1>
