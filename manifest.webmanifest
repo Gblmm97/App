@@ -1,0 +1,18 @@
+{
+  "name": "热量换算",
+  "short_name": "热量",
+  "description": "输入每 100g 的 kJ 和总克数，计算总 kJ 与总 kcal。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffdf8",
+  "theme_color": "#15211d",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
